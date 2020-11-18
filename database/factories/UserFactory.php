@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'ref_location_id' => rand(0,10),
             'pronouns' => 'they/them',
             'bio' => $this->faker->paragraph,
-            'enabled' => (rand(0,4) ? 0 : 1),
+            'enabled' => (rand(0,4) ? 1 : 0),
             'last_logged_in' => $this->faker->dateTime(),
             'email_verified_at' => (rand(0,1) ? null : $this->faker->dateTime())
         ];
