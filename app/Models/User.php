@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'username', 'email', 'password'
     ];
 
     /**
@@ -32,8 +32,4 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    public function checkout()
-    {
-        return $this->hasMany(Checkout::class, 'ref_user_id', 'id');
-    }
 }

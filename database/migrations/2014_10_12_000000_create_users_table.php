@@ -19,11 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('password');
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->unsignedBigInteger('ref_location_id')->nullable();
             $table->text('pronouns')->nullable();
             $table->text('bio')->nullable();
-            $table->boolean('enabled');
+            $table->boolean('enabled')->default('1');
             $table->timestamp('last_logged_in')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
