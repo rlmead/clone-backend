@@ -31,9 +31,9 @@ class UserFactory extends Factory
             'ref_location_id' => rand(0,10),
             'pronouns' => 'they/them',
             'bio' => $this->faker->paragraph,
-            'enabled' => $this->faker->boolean(),
+            'enabled' => (rand(0,4) ? 0 : 1),
             'last_logged_in' => $this->faker->dateTime(),
-            'email_verified_at' => $this->faker->dateTime()
+            'email_verified_at' => (rand(0,1) ? null : $this->faker->dateTime())
         ];
     }
 }
