@@ -24,8 +24,16 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'username' => $this->faker->userName,
             'email' => $this->faker->unique()->safeEmail,
             'password' => Str::random(10),
+            'image_url' => $this->faker->url,
+            'ref_location_id' => rand(0,10),
+            'pronouns' => 'they/them',
+            'bio' => $this->faker->paragraph,
+            'enabled' => $this->faker->boolean(),
+            'last_logged_in' => $this->faker->dateTime(),
+            'email_verified_at' => $this->faker->dateTime()
         ];
     }
 }
