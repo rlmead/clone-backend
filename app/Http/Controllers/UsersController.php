@@ -36,8 +36,6 @@ class UsersController extends Controller
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
     }
-
-    // custom functions
     
     public function index()
     {
@@ -49,6 +47,20 @@ class UsersController extends Controller
         return User::findOrFail($id);
     }
 
+    public function update(Request $request)
+    {
+        $input = $request->all();
+        $user = User::find($input['id']);
+        // loop through input associative array
+        foreach ($input as $field => $value) {
+            // update all fields that are in input
+            $user[$field] = $value;
+        }
+        $user->save();
+        
+        return response(['message' => 'User updated successfully!', 'status' => true, 'user' => $user['username']]);
+    }
+
     public function delete(Request $request)
     {
         $input = $request->all();
@@ -57,4 +69,5 @@ class UsersController extends Controller
 
         return response(['message' => 'User deleted successfully!', 'status' => true, 'id' => $input['id']]);
     }
+
 }
