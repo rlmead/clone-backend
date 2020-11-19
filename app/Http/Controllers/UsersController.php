@@ -9,15 +9,17 @@ use Validator;
 
 class UsersController extends Controller
 {
-
-
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'username' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
+            'name' => 'required|string|max:64',
+            'username' => 'required|string|max:64',
+            'email' => 'required|email|max:64',
+            'password' => 'required|string',
+            'image_url' => 'nullable|url',
+            'ref_location_id' => 'nullable|int',
+            'pronouns' => 'nullable|max:64',
+            'bio' => 'nullable|max:255'
         ]);
 
         if($validator->fails()){
