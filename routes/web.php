@@ -20,6 +20,11 @@ $router->get('/', function () use ($router) {
 $router->post('/register','UsersController@register');
 
 $router->get('/users', 'UsersController@index');
-$router->post('/users/update', 'UsersController@update');
-$router->post('/users/delete', 'UsersController@delete');
 $router->get('/users/{id}', 'UsersController@get');
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->post('/users/update', 'UsersController@update');
+    $router->post('/users/delete', 'UsersController@delete');
+});
+
+
