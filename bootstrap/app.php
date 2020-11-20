@@ -62,7 +62,6 @@ $app->singleton(
 $app->configure('app');
 
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -73,6 +72,7 @@ $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 | route or middleware that'll be assigned to some specific routes.
 |
 */
+$app->configure('auth');
 
 // Enable Facades
 $app->withFacades();
@@ -84,22 +84,19 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
-$app->register(App\Providers\AppServiceProvider::class);
-$app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
-
 // Finally register two service providers - original one and Lumen adapter
 $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+\Dusterio\LumenPassport\LumenPassport::routes($app, ['prefix' => 'v1/oauth']);
+
+// $app->configure('cors');
+
+// $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
-
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -110,8 +107,6 @@ $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
-$app->configure('auth');
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
@@ -128,12 +123,14 @@ $app->configure('auth');
 |
 */
 
-\Dusterio\LumenPassport\LumenPassport::routes($app, ['prefix' => 'v1/oauth']);
-
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+ ]);
 
 return $app;
