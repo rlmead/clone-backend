@@ -47,11 +47,11 @@ class UsersController extends Controller
         return User::findOrFail($id);
     }
 
-    public function get_id(Request $request)
+    public function get_by_email(Request $request)
     {
         $input = $request->all();
         $user = User::where('email',$input['email'])->get()->first();
-        return $user['id'];
+        return $user;
     }
 
     public function update(Request $request)

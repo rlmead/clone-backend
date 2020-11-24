@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 $router->post('/register','UsersController@register');
 
 $router->get('/users', 'UsersController@index');
-$router->post('/users/get_id', 'UsersController@get_id');
+$router->post('/users/get_by_email', 'UsersController@get_by_email');
 $router->get('/users/{id}', 'UsersController@get');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
