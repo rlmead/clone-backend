@@ -13,7 +13,6 @@ class UsersController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:64',
-            'username' => 'required|string|max:64',
             'email' => 'required|email|max:64',
             'password' => 'required|string',
             'image_url' => 'nullable|url',
@@ -65,7 +64,7 @@ class UsersController extends Controller
         }
         $user->save();
         
-        return response(['message' => 'User updated successfully!', 'status' => true, 'user' => $user['username']]);
+        return response(['message' => 'User updated successfully!', 'status' => true, 'user' => $user['email']]);
     }
 
     public function delete(Request $request)
