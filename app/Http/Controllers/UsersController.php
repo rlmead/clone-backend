@@ -13,7 +13,6 @@ class UsersController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:64',
-            'username' => 'required|string|max:64',
             'email' => 'required|email|max:64',
             'password' => 'required|string',
             'image_url' => 'nullable|url',
@@ -32,7 +31,7 @@ class UsersController extends Controller
       
         /**Take note of this: Your user authentication access token is generated here **/
         $data['token'] =  $user->createToken('MyApp')->accessToken;
-        $data['name'] =  $user->name;
+        $data['user_data'] = $user;
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
     }
@@ -47,11 +46,11 @@ class UsersController extends Controller
         return User::findOrFail($id);
     }
 
-    public function get_id(Request $request)
+    public function get_by_email(Request $request)
     {
         $input = $request->all();
         $user = User::where('email',$input['email'])->get()->first();
-        return $user['id'];
+        return $user;
     }
 
     public function update(Request $request)
@@ -65,7 +64,7 @@ class UsersController extends Controller
         }
         $user->save();
         
-        return response(['message' => 'User updated successfully!', 'status' => true, 'user' => $user['username']]);
+        return response(['message' => 'User updated successfully!', 'status' => true, 'user' => $user['email']]);
     }
 
     public function delete(Request $request)
