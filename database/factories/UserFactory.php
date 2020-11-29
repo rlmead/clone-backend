@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'password' => Str::random(10),
-            'image_url' => $this->faker->url,
+            'image_url' => null,
             'ref_location_id' => rand(0,10),
             'pronouns' => 'they/them',
             'bio' => $this->faker->paragraph,
