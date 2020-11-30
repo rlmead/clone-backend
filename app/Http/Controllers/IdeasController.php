@@ -30,7 +30,7 @@ class IdeasController extends Controller
     
     public function index()
     {
-        return Idea::get();
+        return Idea::select('id', 'name', 'image_url')->get();
     }
 
     public function get($id)

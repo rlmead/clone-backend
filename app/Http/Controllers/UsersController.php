@@ -38,7 +38,7 @@ class UsersController extends Controller
     
     public function index()
     {
-        return User::get();
+        return User::select('id', 'name', 'image_url')->get();
     }
 
     public function get($id)
