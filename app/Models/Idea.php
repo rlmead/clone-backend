@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Idea extends Model
 {
     use HasFactory;
     
-    protected $table = 'books';
+    protected $table = 'ideas';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = true;
 
-    public function checkout()
-    {
-        return $this->hasMany(Checkout::class, 'ref_book_id', 'id');
-    }
+    protected $fillable = [
+        'name', 'status', 'image_url', 'ref_location_id', 'description'
+    ];
+
 }
