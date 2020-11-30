@@ -22,6 +22,19 @@ class CreateIdeasTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('idea_user', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('ref_idea_id');
+            $table->unsignedBigInteger('ref_user_id');
+            $table->string('user_role');
+            $table->timestamps();
+
+            $table->unique(['ref_idea_id', 'ref_user_id']);
+
+            $table->foreign('ref_idea_id')->references('id')->on('ideas')->onDelete('cascade');
+            $table->foreign('ref_user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
