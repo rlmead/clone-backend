@@ -25,7 +25,7 @@ class IdeaFactory extends Factory
             'name' => $this->faker->sentence,
             'status' => (rand(0,4) ? "open" : "closed"),
             'image_url' => null,
-            'ref_location_id' => rand(0,10),
+            'location_id' => rand(0,10),
             'description' => $this->faker->paragraph
         ];
     }

@@ -18,4 +18,8 @@ class Idea extends Model
         'name', 'status', 'image_url', 'ref_location_id', 'description'
     ];
 
+    public function users() {
+        return $this->belongsToMany('App\Models\User');
+    }
+
 }

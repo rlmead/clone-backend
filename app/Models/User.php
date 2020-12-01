@@ -32,4 +32,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
+    public function ideas() {
+        return $this->belongsToMany('App\Models\Idea');
+    }
+
 }

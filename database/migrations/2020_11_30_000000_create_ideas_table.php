@@ -18,22 +18,22 @@ class CreateIdeasTable extends Migration
             $table->string('name');
             $table->string('status');
             $table->string('image_url')->nullable();
-            $table->unsignedBigInteger('ref_location_id')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
 
         Schema::create('idea_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('ref_idea_id');
-            $table->unsignedBigInteger('ref_user_id');
+            $table->unsignedBigInteger('idea_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('user_role');
             $table->timestamps();
 
-            $table->unique(['ref_idea_id', 'ref_user_id']);
+            $table->unique(['idea_id', 'user_id']);
 
-            $table->foreign('ref_idea_id')->references('id')->on('ideas')->onDelete('cascade');
-            $table->foreign('ref_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idea_id')->references('id')->on('ideas')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
