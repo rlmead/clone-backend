@@ -12,10 +12,10 @@ class IdeasController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:64',
-            'status' => 'required|email|max:8',
+            'status' => 'required|string|max:8',
             'image_url' => 'nullable|url',
             'ref_location_id' => 'nullable|int',
-            'description' => 'nullable|max:255'
+            'description' => 'nullable|string'
         ]);
 
         if($validator->fails()){
@@ -35,7 +35,7 @@ class IdeasController extends Controller
 
     public function get($id)
     {
-        return Idea::findOrFail($id);
+        return Idea::with('users:id')->findOrFail($id);
     }
 
     public function update(Request $request)

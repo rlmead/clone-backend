@@ -18,7 +18,7 @@ class UsersController extends Controller
             'image_url' => 'nullable|url',
             'ref_location_id' => 'nullable|int',
             'pronouns' => 'nullable|max:64',
-            'bio' => 'nullable|max:255'
+            'bio' => 'nullable|text'
         ]);
 
         if($validator->fails()){
