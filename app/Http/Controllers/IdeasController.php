@@ -30,7 +30,7 @@ class IdeasController extends Controller
     
     public function index()
     {
-        return Idea::select('id', 'name', 'image_url')->get();
+        return Idea::select('id', 'name', 'image_url')->where('status', 'open')->orderBy('updated_at', 'desc')->get();
     }
 
     public function get($id)
