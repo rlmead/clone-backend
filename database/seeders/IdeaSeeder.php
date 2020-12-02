@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class IdeaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            UserSeeder::class,
-            IdeaSeeder::class
-        ]);
+        \App\Models\Idea::factory()->count(20)->create();
     }
 }

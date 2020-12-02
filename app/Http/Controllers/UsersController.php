@@ -18,7 +18,7 @@ class UsersController extends Controller
             'image_url' => 'nullable|url',
             'ref_location_id' => 'nullable|int',
             'pronouns' => 'nullable|max:64',
-            'bio' => 'nullable|max:255'
+            'bio' => 'nullable|text'
         ]);
 
         if($validator->fails()){
@@ -38,7 +38,7 @@ class UsersController extends Controller
     
     public function index()
     {
-        return User::get();
+        return User::select('id', 'name', 'image_url')->orderBy('name')->get();
     }
 
     public function get($id)

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image_url')->nullable();
-            $table->unsignedBigInteger('ref_location_id')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->text('pronouns')->nullable();
             $table->text('bio')->nullable();
             $table->boolean('enabled')->default('1');

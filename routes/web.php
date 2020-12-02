@@ -17,15 +17,24 @@ use App\Http\Controllers\UsersController;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->post('/register','UsersController@register');
 
-$router->get('/users', 'UsersController@index');
-$router->get('/users/{id}', 'UsersController@get');
+$router->get('/ideas', 'IdeasController@index');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
+
+    $router->get('/users', 'UsersController@index');
     $router->post('/users/get_by_email', 'UsersController@get_by_email');
     $router->post('/users/update', 'UsersController@update');
     $router->post('/users/delete', 'UsersController@delete');
+    $router->get('/users/{id}', 'UsersController@get');
+
+    $router->post('/ideas/create','IdeasController@generate');
+    $router->post('/ideas/update', 'IdeasController@update');
+    $router->post('/ideas/delete', 'IdeasController@delete');
+    $router->get('/ideas/{id}', 'IdeasController@get');
+
 });
 
 
