@@ -30,6 +30,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/users/delete', 'UsersController@delete');
     $router->get('/users/{id}', 'UsersController@get');
 
+    $router->post('/ideas/index_by_user','IdeasController@index_by_user');
     $router->post('/ideas/create','IdeasController@generate');
     $router->post('/ideas/update', 'IdeasController@update');
     $router->post('/ideas/delete', 'IdeasController@delete');
