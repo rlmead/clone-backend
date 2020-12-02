@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\IdeaUser;
 use Illuminate\Support\Facades\Validator;
 
 class IdeasController extends Controller
@@ -24,6 +25,12 @@ class IdeasController extends Controller
 
         $input = $request->all();
         $idea = Idea::create($input);
+
+        $ideauser = new IdeaUser();
+        $ideauser["idea_id"] = $idea->id;
+        $ideauser["user_id"] = $request->user;
+        $ideauser["user_role"] = "creator";
+        $ideauser->save();
 
         return response(['data' => $idea, 'message' => 'Listing created successfully!', 'status' => true]);
     }
