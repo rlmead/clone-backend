@@ -46,11 +46,13 @@ class IdeasController extends Controller
     public function index_by_user(Request $request)
     {
         $user_id = $request['user'];
-        return Idea::select('id', 'name', 'image_url')
+        return Idea::select('id', 'name', 'image_url', 'status')
         ->with('users:id')
         ->whereHas('users', function($query) use ($user_id) {
         $query->where('users.id', $user_id);
-    })
+        })
+        ->orderBy('status', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->get();
     }
 
