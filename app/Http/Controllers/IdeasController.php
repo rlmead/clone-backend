@@ -43,20 +43,22 @@ class IdeasController extends Controller
         ->get();
     }
 
-    public function get($id)
-    {
-        return Idea::with('users:id')->findOrFail($id);
-    }
-
-    public function get_by_user(Request $request)
+    public function index_by_user(Request $request)
     {
         $user_id = $request['user'];
-        return Idea::with('users:id')
+        return Idea::select('id', 'name', 'image_url')
+        ->with('users:id')
         ->whereHas('users', function($query) use ($user_id) {
         $query->where('users.id', $user_id);
     })
         ->get();
     }
+
+    public function get($id)
+    {
+        return Idea::with('users:id')->findOrFail($id);
+    }
+
 
     public function update(Request $request)
     {
