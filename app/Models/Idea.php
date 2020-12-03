@@ -22,4 +22,20 @@ class Idea extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
+    public function creators() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'creator');
+    }
+
+    public function collaborators() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'collaborator');
+    }
+
+    public function requests() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'request');
+    }
+
+    public function noncreators() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', '!=', 'creator');
+    }
+
 }

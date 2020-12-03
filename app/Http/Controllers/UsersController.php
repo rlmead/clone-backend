@@ -53,6 +53,22 @@ class UsersController extends Controller
         return $user;
     }
 
+    public function get_creations(Request $request)
+    {
+        $input = $request->all();
+        $creations = User::findOrFail($input['id'])->creations;
+        return $creations;
+    }
+
+    public function get_collaborations(Request $request)
+    {
+        $input = $request->all();
+        $collaborations = User::findOrFail($input['id'])->collaborations;
+        return $collaborations;
+    }
+
+
+
     public function update(Request $request)
     {
         $input = $request->all();
