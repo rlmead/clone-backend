@@ -39,4 +39,6 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
   $router->get('/ideas/{id}', 'IdeasController@get');
 
   $router->post('/request_collab', 'IdeaUsersController@generate');
+  $router->post('/update_collab', 'IdeaUsersController@update');
+  $router->post('/delete_collab', 'IdeaUsersController@delete');
 });
