@@ -16,7 +16,7 @@ class IdeaUsersController extends Controller
             'user_role' => 'required|string|max:12'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response(['message' => 'Validation errors', 'errors' =>  $validator->errors(), 'status' => false], 422);
         }
 
@@ -29,24 +29,19 @@ class IdeaUsersController extends Controller
     public function update(Request $request)
     {
         $input = $request->all();
-        $idea_user = IdeaUser::find($input['id']);
-        // loop through input associative array
-        foreach ($input as $field => $value) {
-            // update all fields that are in input
-            $idea_user[$field] = $value;
-        }
+        $idea_user = IdeaUser::where('idea_id', $input['idea_id'])->where('user_id', $input['user_id'])->first();
+        $idea_user['user_role'] = $input['user_role'];
         $idea_user->save();
-        
+
         return response(['message' => 'Relationship updated successfully!', 'status' => true, 'idea_user' => $idea_user['id']]);
     }
 
     public function delete(Request $request)
     {
         $input = $request->all();
-        $idea_user = IdeaUser::find($input['id']);
+        $idea_user = IdeaUser::where('idea_id', $input['idea_id'])->where('user_id', $input['user_id'])->first();
         $idea_user->delete();
 
-        return response(['message' => 'Relationship deleted successfully!', 'status' => true, 'id' => $input['id']]);
+        return response(['message' => 'Relationship deleted successfully!', 'status' => true, 'id' => $idea_user['id']]);
     }
-
 }

@@ -67,8 +67,6 @@ class UsersController extends Controller
         return $collaborations;
     }
 
-
-
     public function update(Request $request)
     {
         $input = $request->all();
