@@ -12,7 +12,6 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-use App\Http\Controllers\UsersController;
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
@@ -34,8 +33,10 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->post('/ideas/create','IdeasController@generate');
     $router->post('/ideas/update', 'IdeasController@update');
     $router->post('/ideas/delete', 'IdeasController@delete');
+    $router->post('/ideas/get_users', 'IdeasController@get_users');
     $router->get('/ideas/{id}', 'IdeasController@get');
-
+    
+    $router->post('/request_collab', 'IdeaUsersController@generate');
 });
 
 

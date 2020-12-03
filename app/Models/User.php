@@ -36,4 +36,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsToMany('App\Models\Idea');
     }
 
+    public function creations() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'creator');
+    }
+
+    public function collaborations() {
+        return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'collaborator');
+    }
+
 }
