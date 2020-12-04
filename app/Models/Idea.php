@@ -18,6 +18,11 @@ class Idea extends Model
         'name', 'status', 'image_url', 'ref_location_id', 'description'
     ];
 
+    public function locations()
+    {
+        return $this->belongsTo('App\Models\Location', 'location_id');
+    }
+
     public function users() {
         return $this->belongsToMany('App\Models\User');
     }

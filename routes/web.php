@@ -46,4 +46,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
   $router->post('/comments/add', 'CommentsController@add');
   $router->post('/comments/update', 'CommentsController@update');
   $router->post('/comments/delete', 'CommentsController@delete');
+
+  $router->post('/locations/add', 'LocationsController@add');
+  $router->post('/locations/get_by_postal_code', 'LocationsController@get_by_postal_code');
 });

@@ -21,6 +21,8 @@ class CreateIdeasTable extends Migration
             $table->unsignedBigInteger('location_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
 
         Schema::create('idea_user', function (Blueprint $table) {
