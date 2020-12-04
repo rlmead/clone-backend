@@ -18,7 +18,7 @@ class Idea extends Model
         'name', 'status', 'image_url', 'ref_location_id', 'description'
     ];
 
-    public function locations()
+    public function location()
     {
         return $this->belongsTo('App\Models\Location', 'location_id');
     }

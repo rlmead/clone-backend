@@ -43,13 +43,13 @@ class UsersController extends Controller
 
     public function get($id)
     {
-        return User::findOrFail($id);
+        return User::with('location')->findOrFail($id);
     }
 
     public function get_by_email(Request $request)
     {
         $input = $request->all();
-        $user = User::where('email',$input['email'])->get()->first();
+        $user = User::with('location')->where('email',$input['email'])->get()->first();
         return $user;
     }
 

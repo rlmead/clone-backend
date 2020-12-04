@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    public function locations()
+    public function location()
     {
         return $this->belongsTo('App\Models\Location', 'location_id');
     }

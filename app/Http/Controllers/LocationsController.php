@@ -14,7 +14,8 @@ class LocationsController extends Controller
             'postal_code' => 'string|max:64',
             'city' => 'string|max:64',
             'state' => 'string|max:64',
-            'country_code' => 'string|max:64'
+            'country_code' => 'string|max:64',
+            'meta' => 'json|nullable'
         ]);
 
         if($validator->fails()){

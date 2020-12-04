@@ -56,9 +56,23 @@ class IdeasController extends Controller
         ->get();
     }
 
+    public function index_by_location(Request $request)
+    {
+        $city = $request['city'];
+        $state = $request['state'];
+        $country = $request['country'];
+        return Idea::select('id', 'name', 'image_url', 'status')
+        ->with('location')
+        ->whereHas('locations', function($query) use ($city, $state, $country) {
+        $query->where('locations.city', $city)->where('locations.state',$state)->where('locations.country', $country);
+        })
+        ->orderBy('updated_at', 'desc')
+        ->get();
+    }
+
     public function get($id)
     {
-        return Idea::findOrFail($id);
+        return Idea::with('location')->findOrFail($id);
     }
 
     public function get_users(Request $request)
