@@ -18,4 +18,8 @@ class Comment extends Model
         'parent_id', 'idea_id', 'user_id', 'text'
     ];
 
+    public function users() {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
 }

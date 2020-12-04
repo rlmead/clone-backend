@@ -31,6 +31,7 @@ class CommentsController extends Controller
     {
         $idea_id = $request['idea_id'];
         return Comment::where('idea_id', $idea_id)
+        ->with('users')
         ->orderBy('created_at', 'desc')
         ->get();
     }
