@@ -5,25 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class IdeaUser extends Model
+class Comment extends Model
 {
     use HasFactory;
-
-    protected $table = 'idea_user';
+    
+    protected $table = 'comments';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = true;
 
     protected $fillable = [
-        'idea_id', 'user_id', 'user_role'
+        'parent_id', 'idea_id', 'user_id', 'text'
     ];
 
-    protected $with = [
-        'idea'
-    ];
-
-    public function idea()
-    {
-        return $this->belongsTo('App\Models\Idea', 'idea_id');
+    public function users() {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
+
 }
