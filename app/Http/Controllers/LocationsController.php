@@ -31,7 +31,8 @@ class LocationsController extends Controller
     public function get_by_postal_code(Request $request)
     {
         $postal_code = $request['postal_code'];
-        return Location::where('postal_code', $postal_code)->get();
+        $country_code = $request['country_code'];
+        return Location::where('postal_code', $postal_code)->where('country_code', $country_code)->get();
     }
 
 }
