@@ -58,7 +58,7 @@ class IdeasController extends Controller
 
     public function index_by_location($location_string)
     {
-        $location_array = explode("-", $location_string);
+        $location_array = explode("-", str_replace("%20", " ", $location_string));
         $city = $location_array[0];
         $state = $location_array[1];
         $country_code = $location_array[2];
