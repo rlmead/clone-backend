@@ -56,9 +56,32 @@ class IdeasController extends Controller
         ->get();
     }
 
+    public function index_by_location($location_string)
+    {
+        $location_array = explode("-", str_replace("%20", " ", $location_string));
+        $city = $location_array[0];
+        $state = $location_array[1];
+        $country_code = $location_array[2];
+        return Idea::select('id', 'name', 'image_url', 'status')
+        ->with('location')
+        ->where('status','open')
+        // ->where('location.city', $city)
+        ->whereHas('location', function($query) use ($city) {
+        $query->where('locations.city', $city);
+        })
+        ->whereHas('location', function($query) use ($state) {
+        $query->where('locations.state', $state);
+        })
+        ->whereHas('location', function($query) use ($country_code) {
+        $query->where('locations.country_code', $country_code);
+        })
+        ->orderBy('updated_at', 'desc')
+        ->get();
+    }
+
     public function get($id)
     {
-        return Idea::findOrFail($id);
+        return Idea::with('location')->findOrFail($id);
     }
 
     public function get_users(Request $request)

@@ -26,7 +26,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_logged_in')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });
+
     }
 
     /**

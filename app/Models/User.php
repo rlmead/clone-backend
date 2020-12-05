@@ -32,16 +32,23 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    public function ideas() {
+    public function location()
+    {
+        return $this->belongsTo('App\Models\Location', 'location_id');
+    }
+
+    public function ideas()
+    {
         return $this->belongsToMany('App\Models\Idea');
     }
 
-    public function creations() {
+    public function creations()
+    {
         return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'creator')->join('ideas', 'ideas.id', '=', 'idea_user.idea_id')->orderBy('ideas.status', 'desc')->orderBy('ideas.updated_at', 'desc');
     }
 
-    public function collaborations() {
+    public function collaborations()
+    {
         return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'collaborator')->join('ideas', 'ideas.id', '=', 'idea_user.idea_id')->orderBy('ideas.status', 'desc')->orderBy('ideas.updated_at', 'desc');
     }
-
 }
