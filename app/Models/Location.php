@@ -19,7 +19,7 @@ class Location extends Model
     ];
 
     public function ideas() {
-        return $this->belongsToMany('App\Models\Idea')->where('status', 'open')->orderBy('ideas.updated_at', 'desc')->select('id', 'name', 'image_url');
+        return $this->hasMany('App\Models\Idea')->where('status', 'open')->orderBy('ideas.updated_at', 'desc')->select('id', 'name', 'image_url');
     }
 
 }

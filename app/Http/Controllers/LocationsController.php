@@ -35,4 +35,17 @@ class LocationsController extends Controller
         return Location::where('postal_code', $postal_code)->where('country_code', $country_code)->get();
     }
 
+    public function index_by_city()
+    {
+        return Location::select('country_code', 'state', 'city')
+        ->join('ideas', 'location_id', '=', 'locations.id')
+        ->groupBy('country_code')
+        ->groupBy('state')
+        ->groupBy('city')
+        ->orderBy('country_code')
+        ->orderBy('state')
+        ->orderBy('city')
+        ->get();
+    }
+
 }

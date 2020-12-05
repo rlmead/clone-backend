@@ -21,6 +21,9 @@ $router->post('/register', 'UsersController@register');
 
 $router->get('/ideas', 'IdeasController@index');
 
+$router->get('/locations', 'LocationsController@index_by_city');
+$router->get('/locations/{location_string}', 'IdeasController@index_by_location');
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
   $router->get('/users', 'UsersController@index');
@@ -50,5 +53,4 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
   
   $router->post('/locations/add', 'LocationsController@add');
   $router->post('/locations/get_by_postal_code', 'LocationsController@get_by_postal_code');
-  $router->get('/locations/{location_string}', 'IdeasController@index_by_location');
 });
