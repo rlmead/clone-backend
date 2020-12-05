@@ -58,7 +58,7 @@ class IdeasController extends Controller
 
     public function index_by_location($location_string)
     {
-        $location_array = explode("_", $location_string);
+        $location_array = explode("-", $location_string);
         $city = $location_array[0];
         $state = $location_array[1];
         $country_code = $location_array[2];
@@ -68,6 +68,12 @@ class IdeasController extends Controller
         // ->where('location.city', $city)
         ->whereHas('location', function($query) use ($city) {
         $query->where('locations.city', $city);
+        })
+        ->whereHas('location', function($query) use ($state) {
+        $query->where('locations.state', $state);
+        })
+        ->whereHas('location', function($query) use ($country_code) {
+        $query->where('locations.country_code', $country_code);
         })
         ->orderBy('updated_at', 'desc')
         ->get();
