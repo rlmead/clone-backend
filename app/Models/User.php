@@ -51,4 +51,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'collaborator')->join('ideas', 'ideas.id', '=', 'idea_user.idea_id')->orderBy('ideas.status', 'desc')->orderBy('ideas.updated_at', 'desc');
     }
+
+    public function findForPassport($username)
+    {
+        return $user = (new User)->where('email', $username)->orWhere('username', $username)->first();
+    }
 }
