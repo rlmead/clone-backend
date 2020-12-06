@@ -87,7 +87,7 @@ class IdeasController extends Controller
     public function get_users(Request $request)
     {
         $input = $request->all();
-        return Idea::findOrFail($input['id'])->users()->select('users.id', 'users.name')->withPivot('user_role')->get();
+        return Idea::findOrFail($input['id'])->users()->select('users.id', 'users.name', 'users.username')->withPivot('user_role')->get();
     }
 
     public function update(Request $request)
