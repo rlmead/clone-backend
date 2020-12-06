@@ -101,7 +101,7 @@ class IdeasController extends Controller
         }
         $idea->save();
         
-        return response(['message' => 'Idea updated successfully!', 'status' => true, 'idea' => $idea['email']]);
+        return response(['message' => 'Idea updated successfully!', 'status' => true, 'id' => $input['id']]);
     }
 
     public function delete(Request $request)

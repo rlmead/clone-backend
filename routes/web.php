@@ -27,7 +27,7 @@ $router->get('/locations/{location_string}', 'IdeasController@index_by_location'
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
   $router->get('/users', 'UsersController@index');
-  $router->post('/users/get_by_email', 'UsersController@get_by_email');
+  $router->post('/users/get_by_username', 'UsersController@get_by_username');
   $router->post('/users/get_creations', 'UsersController@get_creations');
   $router->post('/users/get_collaborations', 'UsersController@get_collaborations');
   $router->post('/users/update', 'UsersController@update');
