@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'image_url', 'ref_location_id', 'pronouns', 'bio'
+        'name', 'username', 'email', 'password', 'image_url', 'ref_location_id', 'pronouns', 'bio'
     ];
 
     /**
@@ -50,5 +50,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function collaborations()
     {
         return $this->hasMany('App\Models\IdeaUser')->where('user_role', 'collaborator')->join('ideas', 'ideas.id', '=', 'idea_user.idea_id')->orderBy('ideas.status', 'desc')->orderBy('ideas.updated_at', 'desc');
+    }
+
+    public function findForPassport($username)
+    {
+        return $user = (new User)->where('email', $username)->orWhere('username', $username)->first();
     }
 }
