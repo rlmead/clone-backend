@@ -3,7 +3,6 @@
 Homestead.json
 Homestead.yaml
 .env
-app.yaml
 .phpunit.result.cache
 .DS_Store
 /storage
