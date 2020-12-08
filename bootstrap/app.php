@@ -1,9 +1,5 @@
 <?php
 
-// header('Access-Control-Allow-Origin: *');
-// header('Access-Control-Allow-Methods: *');
-// header('Access-Control-Allow-Headers: *');
-
 require_once __DIR__.'/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -135,7 +131,6 @@ $app->router->group([
 
 $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
-    // Fruitcake\Cors\HandleCors::class
  ]);
 
 # [START] Add the following block to `bootstrap/app.php`
@@ -151,7 +146,5 @@ $app->middleware([
 */
 $app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
 # [END]
-
-// $app->configure('cors');
 
 return $app;
